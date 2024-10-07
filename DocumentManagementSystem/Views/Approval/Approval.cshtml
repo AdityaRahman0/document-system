@@ -1,0 +1,77 @@
+﻿@model Repository.ViewModels.DocumentAndDocApprovalViewModel
+@{
+    ViewBag.Title = "Approval";
+}
+
+<h2>Halaman Approval</h2>
+
+<form asp-action="Approval" method="post" class="mt-4">
+    <input type="hidden" name="approvalId" value=@Model.DocumentApproval.ApprovalId />
+    <input type="hidden" name="documentId" value=@Model.Document.DocumentId />
+    <label class="form-label">Document No : </label>
+    <span name="documentNo">@Model.Document.DocumentNo</span>
+    <span>@Model.Document.DocumentNo</span>
+    <input type="hidden" name="documentNo" value=@Model.Document.DocumentNo />
+    <div class="mb-3">
+        <label class="form-label">Department Requestor</label>
+        <input type="text" name="product" class="form-control" value="@Model.Document.DepartementRequestor" readonly />
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Factory</label>
+        <input type="text" name="product" class="form-control" value="@Model.Document.Pabrik" readonly />
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Product</label>
+        <input type="text" name="product" class="form-control" value="@Model.Document.ProductOrMaterial" readonly />
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Description</label>
+        <input type="text" name="remarks" class="form-control" value="@Model.Document.Description" readonly />
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">View Document:</label>
+        <iframe src="@Url.Action("ViewPdf", "Approval", new { fileName = @Model.Document.PathPdf })" width="100%" height="500px"></iframe>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Remarks:</label>
+        <input type="text" name="remarks" class="form-control" placeholder="Enter your remarks..." required />
+    </div>
+    <div class="d-flex justify-content-between">
+        <p></p>
+        <button type="submit" name="action" value="approve" class="btn btn-success">Approve</button>
+        <button type="submit" name="action" value="reject" class="btn btn-danger">Reject</button>
+        <button type="submit" name="action" value="revised" class="btn btn-warning">Revised</button>
+    </div>
+</form>
+
+
+<h2 style="margin-top:100px;">Tracking Approval</h2>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Approver Name</th>
+            <th>Date</th>
+            <th>Status</th>
+            <th>Remarks</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.TrackingStatus)
+        {
+            <tr>
+                <td>@item.UserName</td>
+                <td>@item.ApprovalDate</td>
+                <td>@item.ApprovalStatus</td>
+                <td>@item.Action</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<a class="btn btn-info" href="@Url.Action("Index")">Back to Pending Requests</a>
+

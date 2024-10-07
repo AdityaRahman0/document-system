@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Services", "Services\Servic
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Entities", "Entities\Entities.csproj", "{4D4152A2-55BB-452B-8AAD-E83A61B0F764}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PublicClass", "ClassLibrary1\PublicClass.csproj", "{05F63C4C-AFFE-4C05-B50C-C4E8CB5BCA51}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{4D4152A2-55BB-452B-8AAD-E83A61B0F764}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4D4152A2-55BB-452B-8AAD-E83A61B0F764}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4D4152A2-55BB-452B-8AAD-E83A61B0F764}.Release|Any CPU.Build.0 = Release|Any CPU
+		{05F63C4C-AFFE-4C05-B50C-C4E8CB5BCA51}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{05F63C4C-AFFE-4C05-B50C-C4E8CB5BCA51}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{05F63C4C-AFFE-4C05-B50C-C4E8CB5BCA51}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{05F63C4C-AFFE-4C05-B50C-C4E8CB5BCA51}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

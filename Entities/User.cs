@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace Entities
 {
@@ -15,5 +12,6 @@ namespace Entities
         public string Password { get; set; }
         public DateTime dtmUpd { get; set; }
         public string usrUpd { get; set; }
+        public int DepartmentId { get; set; }
     }
 }

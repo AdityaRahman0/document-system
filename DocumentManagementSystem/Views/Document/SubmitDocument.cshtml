@@ -1,0 +1,66 @@
+﻿@model DocumentManagementSystem.ViewModels.DocumentSubmissionViewModel
+
+@{
+    ViewBag.Title = "Submit Document";
+}
+
+<h2>Submit Document</h2>
+<form asp-action="SubmitDocument" method="post" enctype="multipart/form-data">
+    <div class="form-group">
+        <label for="DocumentNo">Document No</label>
+        <input value="@ViewBag.DocumentNumber" type="text" class="form-control" id="DocumentNo" name="DocumentNo" required readonly/>
+    </div>
+
+    <div class="form-group">
+        <label for="Date">Date</label>
+        <input type="date" class="form-control" id="DateCreated" name="DateCreated" required />
+    </div>
+
+    <div class="form-group">
+        <label for="CreatorDepartment">Departemen Creator/Inisiator</label>
+        <select class="form-control" id="DepartementRequestor" name="DepartementRequestor" required>
+            <option value="">-- Select Departemen Creator --</option>
+            @foreach (var department in Model.Departments)
+            {
+                <option value="@department.DepartmentId">@department.DepartmentName</option>
+            }
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="Factory">Factory</label>
+        <select class="form-control" id="Pabrik" name="Pabrik" required>
+            <option value="">-- Select Factory --</option>
+            <option value="DVL Gunung Putri">DVL Gunung Putri</option>
+            <option value="DVL Citeureup">DVL Citeureup</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="ProductName">Nama Produk/Bahan Baku</label>
+        <textarea class="form-control" id="ProductOrMaterial" name="ProductOrMaterial" rows="3" required></textarea>
+    </div>
+
+    <div class="form-group">
+        <label for="Description">Deskripsi</label>
+        <textarea class="form-control" id="Description" name="Description" rows="3" required></textarea>
+    </div>
+
+    <div class="form-group">
+        <label for="RelatedDepartments">Bagian/Departemen lain yang terkait</label>
+        <select multiple class="form-control" id="Departments" name="SelectedDepartmentIds" required>
+            @foreach (var department in Model.Departments)
+            {
+                <option value="@department.DepartmentId">@department.DepartmentName</option>
+
+            }
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="DocumentFile">Upload Document (PDF)</label>
+        <input type="file" class="form-control" id="PdfFile" name="PdfFile" accept=".pdf" required />
+    </div>
+
+    <button type="submit" class="btn btn-primary">Submit</button>
+    <a href="@Url.Action("Index")" class="btn btn-warning">Kembali</a>
+</form>

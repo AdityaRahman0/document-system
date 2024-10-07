@@ -1,5 +1,4 @@
 ﻿using Dapper;
-using Dapper.Contrib.Extensions;
 using Entities;
 
 namespace Repository
@@ -10,16 +9,17 @@ namespace Repository
         {
             using (var Conn = OpenConnection(conncection))
             {
-                string query = "Select * From test.Users Where UserName = @Username and Password = @Password";
+                string query = "Select * From test.Users with(nolock) Where UserName = @Username and Password = @Password";
                 return Conn.QuerySingleOrDefault<User>(query, new { Username = user, Password = pass});
             }
         }
 
-        public bool RegisterUser(string connection, User user) 
+        public void RegisterUser(string connection, User model) 
         {
             using (var Conn = OpenConnection(connection)) 
             {
-                return Conn.Insert<User>(user) == 0;
+                var insertQuery = "INSERT INTO test.Users (UserName, Email, Role, Password, dtmUpd, usrUpd, Department) VALUES (@UserName, @Email, @Role, @Password, @dtmUpd, @usrUpd, @DepartmentId)";
+                Conn.Execute(insertQuery, model);
             }
         }
     }

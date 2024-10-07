@@ -31,6 +31,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Dapper.Contrib">
+      <HintPath>..\DocumentManagementSystem\Bin\Dapper.Contrib.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -41,6 +44,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AuditTrail.cs" />
+    <Compile Include="Department.cs" />
+    <Compile Include="Document.cs" />
+    <Compile Include="DocumentApproval.cs" />
+    <Compile Include="Notification.cs" />
     <Compile Include="User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

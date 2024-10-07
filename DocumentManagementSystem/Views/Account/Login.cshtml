@@ -6,26 +6,31 @@
 
 }
 
-<h2>Login</h2>
-@using (Html.BeginForm("Login", "Account", FormMethod.Post))
-{
-    @Html.AntiForgeryToken()
+<div class="center-form">
+    <div class="form-container">
+        @using (Html.BeginForm("Login", "Account", FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()
+            <h2 style="text-align:center">Halaman Login</h2>
+            <div class="form-group">
+                <label>Username</label>
+                @Html.TextBoxFor(m => m.UserName, new { @class = "form-control", style ="width:100%" , @required = "required" })
+                @Html.ValidationMessageFor(m => m.UserName, "", new { @class = "text-danger" })
+            </div>
 
-    <div class="form-group">
-        @Html.LabelFor(m => m.UserName)
-        @Html.TextBoxFor(m => m.UserName, new { @class = "form-control" })
-        @Html.ValidationMessageFor(m => m.UserName, "", new { @class = "text-danger" })
+            <div class="form-group">
+                @Html.LabelFor(m => m.Password)
+                @Html.PasswordFor(m => m.Password, new { @class = "form-control",style = "width:100%", @required = "required" })
+                @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+            </div>
+             <div class="form-group">
+                <button type="submit" class="btn btn-success" style="width: 100%">Login</button>
+            </div>
+            @Html.ActionLink("Register", "Register", "Account", null, new { @class = "btn btn-primary", style = "width:100%" })
+            <div class="error" style="font-size:12px; padding:5px; text-align:center;">
+                @ViewBag.Error
+            </div>
+        }
     </div>
-
-    <div class="form-group">
-        @Html.LabelFor(m => m.Password)
-        @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
-        @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
-    </div>
-
-    <button type="submit" class="btn btn-primary">Login</button>
-    <div class="error" style="font-size:12px; padding:5px; text-align:center;">
-        @ViewBag.Error
-    </div>
-}
+</div>
 

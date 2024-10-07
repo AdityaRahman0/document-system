@@ -1,0 +1,33 @@
+﻿@model Repository.ViewModels.DocumentAndDocApprovalViewModel
+@{
+    ViewBag.Title = "Detail";
+}
+
+<h2 style="margin-top:100px;">Detail Tracking Status</h2>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Document Number</th>
+            <th>Approver Name</th>
+            <th>Date</th>
+            <th>Status</th>
+            <th>Remarks</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.TrackingStatus)
+        {
+            <tr>
+                <td>@item.DocumentNo</td>
+                <td>@item.UserName</td>
+                <td>@item.ApprovalDate</td>
+                <td>@item.ApprovalStatus</td>
+                <td>@item.Action</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<a class="btn btn-info" href=""@Url.Action("Index","Tracking", new { documentId = item.DocumentId })"">Back</a>
+
+

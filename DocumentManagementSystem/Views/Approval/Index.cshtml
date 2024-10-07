@@ -1,0 +1,60 @@
+﻿@model Repository.ViewModels.ApprovalPaggingViewModel
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Pending Document Approvals</h2>
+@if (TempData["Message"] != null)
+{
+    <div class="alert alert-success">
+        @TempData["Message"]
+    </div>}
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Document Number</th>
+            <th>Product Name</th>
+            <th>Description</th>
+            <th>Status</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.ApprovalDocument)
+        {
+            <tr>
+                <td>@item.DocumentNo</td>
+                <td>@item.ProductOrMaterial</td>
+                <td>@item.Description</td>
+                <td>@item.Status</td>
+                <td>
+                    <a class="btn btn-primary" href="@Url.Action("Approval","Approval", new { approvalId = item.ApprovalId })">Review</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<nav aria-label="Page navigation">
+    <ul class="pagination">
+        <!-- Tombol untuk halaman sebelumnya -->
+        <li class="page-item @(Model.Pagging.CurrentPage == 1 ? "disabled" : "")">
+            <a class="page-link" href="?page=@(Model.Pagging.CurrentPage - 1)">Previous</a>
+        </li>
+
+        <!-- Tombol untuk setiap halaman -->
+        @for (int i = 1; i <= Model.Pagging.TotalPages; i++)
+        {
+            <li class="page-item @(Model.Pagging.CurrentPage == i ? "active" : "")">
+                <a class="page-link" href="?page=@i">@i</a>
+            </li>
+        }
+
+        <!-- Tombol untuk halaman berikutnya -->
+        <li class="page-item @(Model.Pagging.CurrentPage == Model.Pagging.TotalPages ? "disabled" : "")">
+            <a class="page-link" href="?page=@(Model.Pagging.CurrentPage + 1)">Next</a>
+        </li>
+    </ul>
+</nav>
+

@@ -1,0 +1,69 @@
+﻿@model DocumentManagementSystem.ViewModels.DocumentSubmissionViewModel
+@{
+    ViewBag.Title = "EditDocument";
+}
+
+<h2>Edit Document</h2>
+<form asp-action="EditDocument" method="post" enctype="multipart/form-data">
+    <input type="hidden" name="documentId" value=@Model.document.DocumentId />
+    <div class="form-group">
+        <label for="DocumentNo">Document No</label>
+        <input value="@Model.document.DocumentNo" type="text" class="form-control" id="DocumentNo" name="DocumentNo" required readonly />
+    </div>
+
+
+    <div class="form-group">
+        <label for="CreatorDepartment">Departemen Creator/Inisiator</label>
+        <select class="form-control" id="DepartementRequestor" name="DepartementRequestor" required>
+            <option value="">-- Select Departemen Creator --</option>
+            @foreach (var department in Model.Departments)
+            {
+                <option value="@department.DepartmentId" @(department.DepartmentId == Model.document.DepartementRequestor ? "selected" : "")>
+                    @department.DepartmentName
+                </option>
+            }
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="Factory">Pabrik</label>
+        <select class="form-control" id="Pabrik" name="Pabrik" required>
+            <option value="">-- Select Factory --</option>
+            <option value="DVL Gunung Putri" @(Model.document.Pabrik == "DVL Gunung Putri" ? "selected" : "")>DVL Gunung Putri</option>
+            <option value="DVL Citeureup" @(Model.document.Pabrik == "DVL Citeureup" ? "selected" : "")>DVL Citeureup</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="ProductName">Nama Produk/Bahan Baku</label>
+        <textarea class="form-control" id="ProductOrMaterial" name="ProductOrMaterial" rows="3" required>@Model.document.ProductOrMaterial</textarea>
+    </div>
+
+    <div class="form-group">
+        <label for="Description">Deskripsi</label>
+        <textarea class="form-control" id="Description" name="Description" rows="3" required>@Model.document.Description</textarea>
+    </div>
+
+
+    <div class="form-group">
+        <label for="PdfFile">Dokumen Saat Ini:</label>
+        <div>
+            @if (!string.IsNullOrEmpty(Model.document.PathPdf))
+            {
+                <span>@Model.document.PathPdf</span> 
+            }
+            else
+            {
+                <span>No document uploaded</span>            
+            }
+        </div>
+        <label for="PdfFile">Re-upload Document (PDF)</label>
+        <input type="file" class="form-control" id="PdfFile" name="PdfFile" accept=".pdf" />
+        <small class="form-text text-muted">Upload file baru akan menggantikan file yang ada.</small>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Update</button>
+    <a href="@Url.Action("Index")" class="btn btn-warning">Kembali</a>
+</form>
+
+

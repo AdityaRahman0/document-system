@@ -1,0 +1,78 @@
+﻿@model DocumentManagementSystem.ViewModels.DocumentSubmissionViewModel
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Documents</h2>
+
+@using (Html.BeginForm("Index", "Document", FormMethod.Post))
+{
+<div class="form-row">
+    <div class="form-group col-md-4">
+        @Html.LabelFor(m => m.Pabrik, "Pabrik")
+        @Html.DropDownListFor(m => m.FactoryFilter, new SelectList(Model.PabrikOptions, "", ""), "All", new { @class = "form-control" })
+    </div>
+    <div class="form-group col-md-4">
+        @Html.LabelFor(m => m.Month, "Month")
+        @Html.DropDownListFor(m => m.Month, new SelectList(Enumerable.Range(1, 12).Select(m => new { Value = m, Text = new DateTime(1, m, 1).ToString("MMMM") }), "Value", "Text"), "All", new { @class = "form-control" })
+    </div>
+    <div class="form-group col-md-4">
+        @Html.LabelFor(m => m.Year, "Year")
+        @Html.TextBoxFor(m => m.Year, new { @class = "form-control", placeholder = "All", type = "number", min = "2000", max = DateTime.Now.Year })
+    </div>
+</div>
+
+                <button type="submit" class="btn btn-primary">Filter</button>}
+
+@if (Model.documents.Any())
+{
+<table class="table mt-4">
+    <thead>
+        <tr>
+            <th>Document No</th>
+            <th>Date</th>
+            <th>Pabrik</th>
+            <th>Status</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var document in Model.documents)
+        {
+        <tr>
+            <td>@document.DocumentNo</td>
+            <td>@document.DateCreated.ToShortDateString()</td>
+            <td>@document.Pabrik</td>
+            <td>@document.Status</td>
+            @if (document.Status.ToUpper() == "REVISED")
+            {
+                <td>
+                    <a class="btn btn-primary" href="@Url.Action("EditDocument", "Document", new { id = document.DocumentId })">Revised</a>
+                </td>
+            }
+            else 
+            {
+                <td></td>
+            }
+        </tr>                
+        }
+    </tbody>
+</table>
+<nav aria-label="Page navigation">
+    <ul class="pagination">
+        @for (int i = 1; i <= Model.TotalPages; i++)
+        {
+            <li class="page-item @(i == Model.PageNumber ? "active" : "")">
+                <a class="page-link" href="@Url.Action("Index", new { pageNumber = i })">@i</a>
+            </li>               
+        }
+    </ul>
+</nav> 
+        }else{
+            <p>No documents found.</p>}
+        @if (Model.Role == "Requestor") 
+        {
+            <a href="@Url.Action("SubmitDocument")" class="btn btn-primary">Tambah Dokumen Baru</a>
+        }
+
+

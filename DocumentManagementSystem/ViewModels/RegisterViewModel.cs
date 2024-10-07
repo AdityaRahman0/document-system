@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Entities;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Web.Mvc;
 
@@ -21,5 +22,7 @@ namespace DocumentManagementSystem.ViewModels
         public string Role { get; set; }
 
         public List<SelectListItem> Roles { get; set; }
+        public IEnumerable<Department> Departments { get; set; }
+        public int SelectedDepartments { get; set; }
     }
 }

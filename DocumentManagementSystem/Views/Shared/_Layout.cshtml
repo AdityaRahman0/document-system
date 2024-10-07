@@ -16,14 +16,19 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                @Html.ActionLink("Document Management System", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav" id="test">
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                    <li>@Html.ActionLink("Document", "Index", "Document")</li>
+                    @if (Session["Role"].ToString().ToUpper() != "REQUESTOR")
+                    {
+                        <li>@Html.ActionLink("Approval", "Index", "Approval")</li>
+                    }
+                    <li>@Html.ActionLink("Tracking", "Index", "Tracking")</li>
                 </ul>
+                
                 <ul class="nav navbar-nav navbar-right">
                     <!-- Add this class for right alignment -->
                     <li>@Html.ActionLink("Logout", "Logout", "Account")</li>

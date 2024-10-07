@@ -55,13 +55,28 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AccountRepository.cs" />
+    <Compile Include="ApprovalRepository.cs" />
+    <Compile Include="AuditTrailRepository.cs" />
     <Compile Include="BaseDataAccess.cs" />
+    <Compile Include="DocumentRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UserRepository.cs" />
+    <Compile Include="ViewModels\ApprovalPaggingViewModel.cs" />
+    <Compile Include="ViewModels\ApprovalViewModel.cs" />
+    <Compile Include="ViewModels\BasePagging.cs" />
+    <Compile Include="ViewModels\DocumentAndDocApprovalViewModel.cs" />
+    <Compile Include="ViewModels\DocumentStatusViewModel.cs" />
+    <Compile Include="ViewModels\DropDown.cs" />
+    <Compile Include="ViewModels\TrackingStatusViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\ClassLibrary1\PublicClass.csproj">
+      <Project>{05F63C4C-AFFE-4C05-B50C-C4E8CB5BCA51}</Project>
+      <Name>PublicClass</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Entities\Entities.csproj">
       <Project>{4D4152A2-55BB-452B-8AAD-E83A61B0F764}</Project>
       <Name>Entities</Name>

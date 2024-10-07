@@ -17,16 +17,19 @@
 }
 
 /* Set width on the form input elements since they're 100% wide by default */
-input,
-select,
-textarea {
-    max-width: 280px;
-}
-.navbar-nav {
-    display: flex;
-    justify-content: flex-start; /* Align items to the start */
-}
 
 .navbar-nav li {
     margin-right: auto; /* Push other items to the right */
+}
+
+.center-form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh; /* Mengatur tinggi minimum agar form terpusat secara vertikal */
+}
+
+.form-container {
+    width: 100%; /* Atur lebar container sesuai kebutuhan */
+    max-width: 400px; /* Atur lebar maksimal sesuai kebutuhan */
 }

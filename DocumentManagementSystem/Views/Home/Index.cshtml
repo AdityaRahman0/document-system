@@ -1,17 +1,96 @@
-﻿@{
+﻿@model Repository.ViewModels.DocumentStatusViewModel
+
+@{
     ViewBag.Title = "Home Page";
 }
+<div class="container">
+    <h2 class="page-header">Document Total</h2>
 
-<div class="jumbotron">
-    <p class="lead">Selamat Datang @Session["UserName"]</p>
-</div>
+    <!-- Filter Section -->
+    @using (Html.BeginForm("Index", "Home", FormMethod.Get))
+    {
+        <div class="row">
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label for="Factory">Factory</label>
+                    <select id="Factory" name="factoryId" class="form-control">
+                        <option value="">Select Factory</option>
+                        @foreach (var factory in Model.Factories)
+                        {
+                            <option value="@factory")>@factory</option>
+                        }
+                    </select>
+                </div>
+            </div>
 
-<div class="row">
-    <div class="col-md-4">
-        
-    </div>
-    <div class="col-md-4">
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label for="Month">Month</label>
+                    <select id="Month" name="month" class="form-control" required>
+                        <option value="">Select Month</option>
+                        @foreach (var month in Model.Months)
+                        {
+                            <option value="@month.Value" @(month.Value == Model.SelectedMonth.ToString() ? "selected" : "")>@month.Text</option>
+                        }
+                    </select>
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label for="Year">Year</label>
+                    <select id="Year" name="year" class="form-control" required>
+                        <option value="">Select Year</option>
+                        @foreach (var year in Model.Years)
+                        {
+                            <option value="@year.Value" @(year.Value == Model.SelectedYear.ToString() ? "selected" : "")>@year.Text</option>
+                        }
+                    </select>
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary" style="margin-top: 25px;">Search</button>
+                </div>
+            </div>
         </div>
-    <div class="col-md-4">
-</div>
+    }
+
+    <hr />
+
+    <!-- Dashboard Section -->
+    @if (@Model.ApprovedCount != null && @Model.RejectedCount != null && @Model.RevisedCount != null)
+    {
+        <div class="row">
+            <div class="col-md-4">
+                <div class="panel panel-success">
+                    <div class="panel-heading text-center">Approved</div>
+                    <div class="panel-body text-center">
+                        <h1 class="text-success">@Model.ApprovedCount</h1>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="panel panel-danger">
+                    <div class="panel-heading text-center">Rejected</div>
+                    <div class="panel-body text-center">
+                        <h1 class="text-danger">@Model.RejectedCount</h1>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="panel panel-warning">
+                    <div class="panel-heading text-center">Revised</div>
+                    <div class="panel-body text-center">
+                        <h1 class="text-warning">@Model.RevisedCount</h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+    else
+    {
+        <p>No data available. Please select factory, month, and year to view document status summary.</p>
+    }
 </div>
